@@ -2,13 +2,9 @@ package com.example.lymphocytes;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface LymphocyteRepository extends MongoRepository<Lymphocyte, String> {
+public interface LymphocyteRepository extends MongoRepository<Lymphocyte, Long> {
 
-    List<Lymphocyte> findById(Long id);
-
-    List<Lymphocyte> findByType(String type);
-
-    List<Lymphocyte> findByIdentifiedInvader(boolean identifiedInvader);
+    Optional<Lymphocyte> findById(Long id);
 }
