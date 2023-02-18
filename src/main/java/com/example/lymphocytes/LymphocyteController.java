@@ -1,15 +1,12 @@
 package com.example.lymphocytes;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/attack")
+@RequestMapping("/lymph")
 public class LymphocyteController {
 
     private final LymphocyteService service;
@@ -19,13 +16,18 @@ public class LymphocyteController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Lymphocyte>> getAllLymphocytes(){
+    public ResponseEntity<List<LymphocyteDto>> getAllLymphocytes(){
         return ResponseEntity.ok(service.getAll());
     }
 
+    @GetMapping(value = "/{lymphocyteId}")
+    public ResponseEntity<LymphocyteDto> getLymphocyteWithId(@PathVariable Long lymphocyteId){
+        return ResponseEntity.ok(service.getLymphocyte(lymphocyteId));
+    }
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<Lymphocyte> createLymphocyte(){
+
+    @PostMapping()
+    public ResponseEntity<LymphocyteDto> createLymphocyte(){
         return ResponseEntity.ok(service.createLymphocyte());
     }
 
